@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS `trucking` (
+    `id` INT AUTO_INCREMENT PRIMARY KEY,
+    `citizenid` VARCHAR(50) NOT NULL,
+    `xp` INT NOT NULL DEFAULT 0,
+    `level` INT NOT NULL DEFAULT 1
+);

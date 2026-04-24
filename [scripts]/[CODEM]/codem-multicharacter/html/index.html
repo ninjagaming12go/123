@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="./js/vue.global.js"></script>
+        <script src="./js/vuex.global.js"></script>
+        <link rel="stylesheet" href="./css/index.css" />
+        <link rel="stylesheet" href="./js/air-datepicker.css" />
+        <script src="https://cdn.tailwindcss.com/3.3.5"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet" />
+        <title>Codem Multicharacter</title>
+    </head>
+
+    <body>
+        <div id="app" style="display: block">
+            <div class="w-full h-[100vh]" style="background-image: url(./templateimages/bA.png); background-size: 100% 100%">
+                <div class="w-full h-full absolute" style="z-index: -10; background: linear-gradient(180deg, rgba(9, 9, 19, 0.94) -10.4%, #07060e 110.4%); filter: blur(1.8333vw); opacity: 0.7" v-if="checkModal('tebex')"></div>
+                <div class="w-full h-full" :style="{backgroundImage : 'url(./templateimages/'+currentThema+'themabackground.png)'}" style="background-size: 100% 100%; overflow: hidden; z-index: 3">
+                    <div class="w-full h-[7.4%] flex items-end justify-center">
+                        <div class="w-[93%] h-[67%] flex">
+                            <div class="w-[40.6%] h-full flex">
+                                <div class="inline-flex h-full flex-col flex justify-start">
+                                    <h2 :class="currentThema+'text'" class="text-[1.5vw] font-normal font-['Gilroy-Black']" style="line-height: 99%">{{locales['CHARACTER']}}</h2>
+                                    <h2 class="text-white text-[0.7vw] font-normal font-['Gilroy-Black']" style="line-height: 180%">{{locales['SELECTION']}}</h2>
+                                </div>
+                                <div class="flex-1 h-full flex justify-end items-center">
+                                    <div class="w-[95%] h-[6%] flex">
+                                        <div class="w-[0.2vw] h-full bg-white"></div>
+                                        <div class="flex-1 h-full bg-zinc-300 bg-opacity-20"></div>
+                                        <div class="w-[0.2vw] h-full bg-white"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-[19%] h-full flex items-center justify-center">
+                                <div class="w-[60%] h-full relative">
+                                    <img class="w-full h-full absolute" src="./templateimages/logo.png" alt="" />
+                                    <div class="w-full h-[75%] flex absolute mt-[0.5vh]">
+                                        <div class="w-[25%] h-full flex items-center justify-center">
+                                            <img class="w-[70%] h-[70%]" :src="serverlogo" alt="" />
+                                        </div>
+                                        <div class="w-[75%] h-full flex items-center justify-start">
+                                            <h2 :class="currentThema+'text'" style="letter-spacing: 0.1vw" class="text-[1vw] ml-[0.3vw] font-normal font-['Gilroy-Black']">{{locales['VoidRP']}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-[40.5%] h-full flex">
+                                <div class="w-[78.5%] h-full flex items-center justify-center">
+                                    <div class="w-[0.2vw] h-[0.3vh] bg-white"></div>
+                                    <div class="flex-1 h-[0.3vh] bg-zinc-300 bg-opacity-20"></div>
+                                    <div class="w-[0.2vw] h-[0.3vh] bg-white"></div>
+                                </div>
+                                <div class="w-[21.5%] h-full flex justify-end">
+                                    <div class="w-[70%] h-full flex flex-col items-end justify-center">
+                                        <h2 style="line-height: 99%" class="text-white mr-[0.5vw] text-[0.7vw] font-normal font-['Gilroy-SemiBold']">{{locales['EXITFROM']}}</h2>
+                                        <h2 style="line-height: 100%" class="text-white mr-[0.5vw] text-[0.7vw] font-normal font-['Gilroy-SemiBold']">{{locales['SERVER']}}</h2>
+                                    </div>
+                                    <div class="w-[32%] h-full flex items-center justify-center">
+                                        <div class="w-full h-[60%] bg-[#FE002E] rounded-[0.3vw] flex items-center justify-center">
+                                            <h2 class="font-normal font-['Gilroy-Heavy'] text-[0.8vw]">{{locales['ESC']}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-[17.5%] flex items-center justify-center">
+                        <div class="w-full h-full flex items-center justify-between" v-if="checkModal('tebex')">
+                            <div class="w-[20%] h-full flex justify-end">
+                                <div class="w-[89.5%] h-full flex items-center">
+                                    <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                                    <div class="flex-1 h-[0.5%] bg-zinc-300 bg-opacity-20"></div>
+                                    <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                                </div>
+                            </div>
+                            <div class="w-[60%] h-full flex items-center justify-center relative cursor-pointer">
+                                <h2 class="text-[#FFF388] text-[2.5vw] mb-[6.3vw] font-['Gilroy-Black'] absolute textCss" style="font-style: italic; z-index: index 2; opacity: 0.09">{{locales['OPEN_NEW_CHARACTER_SLOT']}}</h2>
+                                <h2 class="text-[#FFF388] text-[2.5vw] mb-[3.3vw] font-['Gilroy-Black'] absolute textCss" style="font-style: italic; z-index: index 3; opacity: 0.26">{{locales['OPEN_NEW_CHARACTER_SLOT']}}</h2>
+                                <h2 class="text-[#FFF388] text-[2.5vw] font-['Gilroy-Black'] absolute textCss" style="font-style: italic; z-index: index 4">{{locales['OPEN_NEW_CHARACTER_SLOT']}}</h2>
+                            </div>
+
+                            <div class="w-[20%] h-full flex items-center">
+                                <div class="w-[89.5%] h-full flex items-center">
+                                    <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                                    <div class="flex-1 h-[0.5%] bg-zinc-300 bg-opacity-20"></div>
+                                    <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-[30%] h-[30%] flex items-center justify-between" v-else="">
+                            <div class="w-[15%] h-full flex items-center justify-center hover-anim cursor-pointer" @click="ChangeCharacter('previus')">
+                                <img style="transform: rotate(180deg)" class="h-[50%]" src="./templateimages/svg/lefticon.svg" alt="" />
+                            </div>
+                            <div class="w-[70%] h-full flex items-center justify-center">
+                                <h2 class="text-white text-[1.7vw] font-normal font-['Gilroy-Black']">{{ myCharacter.label }}</h2>
+                            </div>
+                            <div class="w-[15%] h-full flex items-center justify-center hover-anim cursor-pointer" @click="ChangeCharacter('next')">
+                                <img class="h-[50%]" src="./templateimages/svg/lefticon.svg" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full h-[49.5%] flex justify-between">
+                        <div class="w-full h-full flex items-center justify-center" v-if="checkModal('tebex')">
+                            <div class="w-full h-full flex items-center justify-center">
+                                <div class="w-[26%] h-[46%] flex items-center justify-center flex-col" style="background-image: url(./templateimages/popup.png); background-size: 100% 100%">
+                                    <div class="w-full h-[40%] flex flex items-center justify-center flex-col">
+                                        <div class="w-[60%] h-[60.5%] flex items-center justify-center">
+                                            <img class="h-[50%]" src="./templateimages/svg/tebex-add.svg" alt="" />
+                                        </div>
+                                        <div class="w-[60%] h-[39.5%] flex items-center justify-center">
+                                            <h2 class="text-white text-[1.0417vw] font-normal font-['Gilroy-SemiBold']">{{locales['BUY_NEW_CHARACTER_SLOT']}}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="w-full h-[60%] flex items-center flex-col">
+                                        <div class="w-full h-[12%]"></div>
+                                        <input v-model="tbxID" type="text" placeholder="Your tbx-id..." class="custom-input w-[80%] h-[30%] border-none text-white font-['Gilroy-SemiBold'] indent-[0.2vw] rounded-[.2vw] p-[0.8rem]" style="background-color: transparent; border: 0.1042vw solid #fff388" />
+
+                                        <div class="w-full h-[11%]"></div>
+                                        <div class="w-[80%] h-[30%] rounded-[.2vw] flex items-center text-center justify-center OPEN_SLOT" style="border: 0.1042vw solid #fff388">
+                                            <h2 class="text-[#FFF388] text-[.7292vw] font-normal font-['Gilroy-SemiBold'] cursor-pointer OPEN_SLOT_TEXT" @click="checkTebex">{{locales['OPEN_SLOT']}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full h-full flex items-center justify-center" v-if="checkModal('quitServerModal')">
+                            <div class="w-full h-full flex items-center justify-center">
+                                <div class="w-[26%] h-[46%] flex items-center justify-center flex-col" style="background-image: url(./templateimages/closeanddeletepopup.png); background-size: 100% 100%">
+                                    <div class="w-full h-[60%] flex flex items-center justify-center flex-col">
+                                        <div class="w-[80%] h-[39.5%] flex items-center justify-center text-center">
+                                            <h2 class="text-white text-[1.0417vw] font-normal font-['Gilroy-SemiBold']" style="letter-spacing: 0.0521vw">{{locales['LEAVE_MODAL_TEXT']}}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="w-[80%] h-[40%] flex items-center justify-between">
+                                        <div class="w-[40%] h-[50%] bg-[#FE002E] rounded-[.2vw] flex items-center text-center justify-center yesButtonCss cursor-pointer" @click="clickModal('closeServer', true)" style="border: 0.0521vw solid #fe002e">
+                                            <h2 class="text-white text-[.7292vw] font-normal font-['Gilroy-SemiBold']">{{locales['YES']}}</h2>
+                                        </div>
+                                        <div class="w-[40%] h-[50%] bg-[#FFF] rounded-[.2vw] flex items-center text-center justify-center noButtonCss cursor-pointer" @click="clickModal('closeServer', false)" style="border: 0.1042vw solid #fff">
+                                            <h2 class="text-[#000] text-[.7292vw] font-normal font-['Gilroy-SemiBold']">{{locales['NO']}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full h-full flex items-center justify-center" v-if="checkModal('deleteCharacterModal')">
+                            <div class="w-full h-full flex items-center justify-center">
+                                <div class="w-[26%] h-[46%] flex items-center justify-center flex-col" style="background-image: url(./templateimages/closeanddeletepopup.png); background-size: 100% 100%">
+                                    <div class="w-full h-[60%] flex flex items-center justify-center flex-col">
+                                        <div class="w-[80%] h-[39.5%] flex items-center justify-center text-center">
+                                            <h2 class="text-white text-[1.0417vw] font-normal font-['Gilroy-SemiBold']" style="letter-spacing: 0.0521vw">{{locales['DELETE_MODAL_TEXT']}}</h2>
+                                        </div>
+                                    </div>
+                                    <div class="w-[80%] h-[40%] flex items-center justify-between">
+                                        <div class="w-[40%] h-[50%] bg-[#FE002E] rounded-[.2vw] flex items-center text-center justify-center yesButtonCss cursor-pointer" @click="clickModal('deleteCharacter', true)" style="border: 0.0521vw solid #fe002e">
+                                            <h2 class="text-white text-[.7292vw] font-normal font-['Gilroy-SemiBold']">{{locales['YES']}}</h2>
+                                        </div>
+                                        <div class="w-[40%] h-[50%] bg-[#FFF] rounded-[.2vw] flex items-center text-center justify-center noButtonCss cursor-pointer" @click="clickModal('deleteCharacter', false)" style="border: 0.1042vw solid #fff">
+                                            <h2 class="text-[#000] text-[.7292vw] font-normal font-['Gilroy-SemiBold']">{{locales['NO']}}</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-[29%] h-full flex items-center justify-end" v-if="checkModal('none')">
+                            <transition-group name="leftpage">
+                                <div v-if="checkPage('mychar')" class="w-[88.2%] h-full">
+                                    <div class="w-full h-full justify-between flex">
+                                        <div class="w-[0.7%] h-full">
+                                            <div class="w-full h-[0.5%] bg-white"></div>
+                                            <div class="flex-1 h-[99%] bg-zinc-300 bg-opacity-20"></div>
+                                            <div class="w-full h-[0.5%] bg-white"></div>
+                                        </div>
+                                        <div class="w-[93%] h-full flex flex-col justify-between" v-if="myCharacter">
+                                            <div class="w-full h-[20%] flex justify-between">
+                                                <div class="w-[76%] h-full bg-zinc-300 bg-opacity-5 rounded-tl-lg rounded-bl-lgroun hover-anim-2">
+                                                    <h2 class="text-white text-[1.3vw] ml-[1.15vw] mt-[1.7vh] font-['Gilroy-Black']">{{locales['OCCUPATION']}}</h2>
+                                                    <h2 class="text-white text-[1vw] opacity-70 text-white font-['Gilroy-Bold'] ml-[1.15vw]" style="font-style: italic" v-if="myCharacter.job && myCharacter.job.name && myCharacter.job.grade != null">{{myCharacter.job.name}} - {{myCharacter.job.grade}}</h2>
+                                                </div>
+                                                <div class="w-[22.5%] h-full flex items-center justify-center bg-zinc-300 bg-opacity-20 rounded-tr-[.4688vw] rounded-br-[.4688vw]">
+                                                    <img class="h-[36%]" src="./templateimages/svg/bagicon.svg" alt="" />
+                                                </div>
+                                            </div>
+                                            <div class="w-full h-[20%] flex justify-between">
+                                                <div class="w-[76%] h-full bg-zinc-300 bg-opacity-5 rounded-tl-lg rounded-bl-lg hover-anim-2">
+                                                    <h2 class="text-white text-[1.3vw] ml-[1.15vw] mt-[1.7vh] font-['Gilroy-Black']">{{locales['FACTION']}}</h2>
+                                                    <h2 class="text-white text-[1vw] opacity-70 text-white font-['Gilroy-Bold'] ml-[1.15vw]" style="font-style: italic" v-if="myCharacter.job2 && myCharacter.job2.name && myCharacter.job2.grade != null">{{myCharacter.job2.name}} - {{myCharacter.job2.grade}}</h2>
+                                                </div>
+                                                <div class="w-[22.5%] h-full flex items-center justify-center bg-zinc-300 bg-opacity-20 rounded-tr-[.4688vw] rounded-br-[.4688vw]">
+                                                    <img class="h-[36%]" src="./templateimages/svg/factionicon.svg" alt="" />
+                                                </div>
+                                            </div>
+                                            <div class="w-full h-[20%] flex justify-between">
+                                                <div class="w-[76%] h-full bg-zinc-300 bg-opacity-5 rounded-tl-lg rounded-bl-lg hover-anim-2">
+                                                    <h2 class="text-white text-[1.3vw] ml-[1.15vw] mt-[1.7vh] font-['Gilroy-Black']">{{locales['BIRTHDATE2']}}</h2>
+                                                    <h2 class="text-white text-[1vw] opacity-70 text-white font-['Gilroy-Bold'] ml-[1.15vw]" style="font-style: italic">{{myCharacter.charinfo.birthdate}}</h2>
+                                                </div>
+                                                <div class="w-[22.5%] h-full flex items-center justify-center bg-zinc-300 bg-opacity-20 rounded-tr-[.4688vw] rounded-br-[.4688vw]">
+                                                    <img class="h-[36%]" src="./templateimages/svg/birtdateicon.svg" alt="" />
+                                                </div>
+                                            </div>
+                                            <div class="w-full h-[20%] flex justify-between">
+                                                <div class="w-[76%] h-full bg-zinc-300 bg-opacity-5 rounded-tl-lg rounded-bl-lg hover-anim-2">
+                                                    <h2 class="text-white text-[1.3vw] ml-[1.15vw] mt-[1.7vh] font-['Gilroy-Black']">{{locales['NATIONALITY2']}}</h2>
+                                                    <h2 class="text-white text-[1vw] opacity-70 text-white font-['Gilroy-Bold'] ml-[1.15vw]" style="font-style: italic; text-transform: uppercase">{{myCharacter.charinfo.nationality}}</h2>
+                                                </div>
+                                                <div class="w-[22.5%] h-full flex items-center justify-center bg-zinc-300 bg-opacity-20 rounded-tr-[.4688vw] rounded-br-[.4688vw]">
+                                                    <img class="h-[36%]" src="./templateimages/svg/nationalityicon.svg" alt="" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div v-if="checkPage('createchar') && checkModal('none')" class="w-[88.2%] h-full">
+                                    <div class="w-[79%] h-full flex justify-between">
+                                        <div class="w-[0.8%] h-full">
+                                            <div class="w-full h-[0.5%] bg-white"></div>
+                                            <div class="flex-1 h-[99%] bg-zinc-300 bg-opacity-20"></div>
+                                            <div class="w-full h-[0.5%] bg-white"></div>
+                                        </div>
+                                        <div class="w-[90%] h-full flex items-center justify-center bg-[#D9D9D90D] rounded-lg" style="background-image: url(./templateimages/createbg.png); background-size: 100% 100%">
+                                            <div class="w-full h-[98%]">
+                                                <div class="w-full h-[14.2%] flex items-center justify-end">
+                                                    <div class="w-[96%] h-full relative">
+                                                        <h2 class="font-normal text-white mt-[0.5vh] font-['Gilroy-Medium'] text-[0.8vw]" style="font-style: italic">{{locales['WELCOME_TO']}} {{locales['VoidRP']}} {{locales['ROLEPLAY2']}}</h2>
+                                                        <h2 class="font-normal font-['Gilroy-Black'] text-white text-[1vw]">{{locales['CREATE_YOUR_CHARACTER']}}</h2>
+                                                    </div>
+                                                </div>
+                                                <div class="w-full h-[86%] flex items-center justify-center">
+                                                    <div class="w-[93%] h-[85%]">
+                                                        <div class="w-full h-[20.5%]">
+                                                            <div class="w-full h-[43%]">
+                                                                <h2 class="font-normal font-['Gilroy-SemiBold'] text-white text-[0.65vw]">{{locales['GENDER']}}</h2>
+                                                            </div>
+                                                            <div class="w-full h-[57%] flex justify-between">
+                                                                <div :class="selectedGender == 'male' ? 'border-2 border-[#0172F4]' : ''" class="w-[47%] h-full bg-[#002147] cursor-pointer rounded-[0.2vw] flex items-center justify-center" @click="changeGender('male')">
+                                                                    <h2 class="font-['Gilroy-SemiBold'] text-[#0172F4]">{{locales['MALE']}}</h2>
+                                                                </div>
+                                                                <div :class="selectedGender == 'female' ? 'border-2 border-fuchsia-600' : ''" class="w-[47%] h-full bg-[#470047] cursor-pointer rounded-[0.2vw] flex items-center justify-center" @click="changeGender('female')">
+                                                                    <h2 class="font-['Gilroy-SemiBold'] text-[#F401F4]">{{locales['FEMALE']}}</h2>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="w-full h-[26.5%] flex justify-between">
+                                                            <div class="w-[47%] h-full">
+                                                                <div class="w-full h-[41%] flex items-end">
+                                                                    <h2 class="font-normal font-['Gilroy-SemiBold'] text-white text-[0.7vw]">{{locales['NAME']}}</h2>
+                                                                </div>
+                                                                <div class="w-full h-[59%] flex items-end">
+                                                                    <div class="w-full h-[76%]" style="background: rgba(255, 255, 255, 0.05); border-radius: 0.2604vw">
+                                                                        <input @input="checkInputMin" v-model="characterInfo.firstname" type="text" :placeholder="locales.NAME" class="custom-input ml-[.3vw] w-full h-full border-none text-white font-['Gilroy-SemiBold'] indent-[0.2vw]" style="background-color: transparent" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="w-[47%] h-full">
+                                                                <div class="w-full h-[41%] flex items-end">
+                                                                    <h2 class="font-normal font-['Gilroy-SemiBold'] text-white text-[0.7vw]">{{locales['SURNAME']}}</h2>
+                                                                </div>
+                                                                <div class="w-full h-[59%] flex items-end">
+                                                                    <div class="w-full h-[76%]" style="background: rgba(255, 255, 255, 0.05); border-radius: 0.2604vw">
+                                                                        <input @input="checkInputMin" v-model="characterInfo.lastname" type="text" :placeholder="locales.SURNAME" class="w-full h-full ml-[.3vw] custom-input border-none text-white font-['Gilroy-SemiBold'] indent-[0.2vw]" style="background-color: transparent" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="w-full h-[27%] flex justify-between">
+                                                            <div class="w-[47%] h-full">
+                                                                <div class="w-full h-[41%] flex items-end">
+                                                                    <h2 class="font-normal font-['Gilroy-SemiBold'] text-white text-[0.7vw]">{{locales['BIRTHDATE']}}</h2>
+                                                                </div>
+                                                                <div class="w-full h-[59%] flex items-end">
+                                                                    <div class="w-full h-[76%] flex relative" style="background: rgba(255, 255, 255, 0.05); border-radius: 0.2604vw">
+                                                                        <div class="w-[80%] h-full">
+                                                                            <input id="pickerinput" type="text" readonly placeholder="mm/dd/yyyy" class="w-full ml-[.3vw] h-full border-none text-white font-['Gilroy-SemiBold'] indent-[0.2vw]" style="background-color: transparent" />
+                                                                        </div>
+                                                                        <div class="w-[20%] h-full flex items-center justify-center">
+                                                                            <img class="h-[35%]" src="./templateimages/svg/birtdateicon2.svg" alt="" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="w-[47%] h-full">
+                                                                <div class="w-full h-[41%] flex items-end">
+                                                                    <h2 class="font-normal font-['Gilroy-SemiBold'] text-white text-[0.7vw]">{{locales['HEIGHT']}}</h2>
+                                                                </div>
+                                                                <div class="w-full h-[59%] flex items-end">
+                                                                    <div class="w-full h-[76%]" style="background: rgba(255, 255, 255, 0.05); border-radius: 0.2604vw">
+                                                                        <input type="text" @input="checkInputMin" v-model="characterInfo.height" :placeholder="locales.HEIGHT" class="w-full h-full ml-[.3vw] custom-input border-none text-white font-['Gilroy-SemiBold'] indent-[0.2vw]" style="background-color: transparent" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="w-full h-[27%]">
+                                                            <div class="w-full h-[41%] flex items-end">
+                                                                <h2 class="font-normal font-['Gilroy-SemiBold'] text-white text-[0.7vw]">{{locales['NATIONALITY']}}</h2>
+                                                            </div>
+                                                            <div class="w-full h-[59%] flex items-end">
+                                                                <div class="w-full h-[75%] bg-white bg-opacity-20 rounded-[.2604vw]">
+                                                                    <input list="browsers" class="w-0 h-0 bg-transparent" />
+                                                                    <select v-model="characterInfo.nationality" id="browsers" class="input-type w-full h-full">
+                                                                        <option value="afghan">Afghan</option>
+                                                                        <option value="albanian">Albanian</option>
+                                                                        <option value="algerian">Algerian</option>
+                                                                        <option value="american">American</option>
+                                                                        <option value="andorran">Andorran</option>
+                                                                        <option value="angolan">Angolan</option>
+                                                                        <option value="antiguans">Antiguans</option>
+                                                                        <option value="argentinean">Argentinean</option>
+                                                                        <option value="armenian">Armenian</option>
+                                                                        <option value="australian">Australian</option>
+                                                                        <option value="austrian">Austrian</option>
+                                                                        <option value="azerbaijani">Azerbaijani</option>
+                                                                        <option value="bahamian">Bahamian</option>
+                                                                        <option value="bahraini">Bahraini</option>
+                                                                        <option value="bangladeshi">Bangladeshi</option>
+                                                                        <option value="barbadian">Barbadian</option>
+                                                                        <option value="barbudans">Barbudans</option>
+                                                                        <option value="batswana">Batswana</option>
+                                                                        <option value="belarusian">Belarusian</option>
+                                                                        <option value="belgian">Belgian</option>
+                                                                        <option value="belizean">Belizean</option>
+                                                                        <option value="beninese">Beninese</option>
+                                                                        <option value="bhutanese">Bhutanese</option>
+                                                                        <option value="bolivian">Bolivian</option>
+                                                                        <option value="bosnian">Bosnian</option>
+                                                                        <option value="brazilian">Brazilian</option>
+                                                                        <option value="british">British</option>
+                                                                        <option value="bruneian">Bruneian</option>
+                                                                        <option value="bulgarian">Bulgarian</option>
+                                                                        <option value="burkinabe">Burkinabe</option>
+                                                                        <option value="burmese">Burmese</option>
+                                                                        <option value="burundian">Burundian</option>
+                                                                        <option value="cambodian">Cambodian</option>
+                                                                        <option value="cameroonian">Cameroonian</option>
+                                                                        <option value="canadian">Canadian</option>
+                                                                        <option value="cape verdean">Cape Verdean</option>
+                                                                        <option value="central african">Central African</option>
+                                                                        <option value="chadian">Chadian</option>
+                                                                        <option value="chilean">Chilean</option>
+                                                                        <option value="chinese">Chinese</option>
+                                                                        <option value="colombian">Colombian</option>
+                                                                        <option value="comoran">Comoran</option>
+                                                                        <option value="congolese">Congolese</option>
+                                                                        <option value="costa rican">Costa Rican</option>
+                                                                        <option value="croatian">Croatian</option>
+                                                                        <option value="cuban">Cuban</option>
+                                                                        <option value="cypriot">Cypriot</option>
+                                                                        <option value="czech">Czech</option>
+                                                                        <option value="danish">Danish</option>
+                                                                        <option value="djibouti">Djibouti</option>
+                                                                        <option value="dominican">Dominican</option>
+                                                                        <option value="dutch">Dutch</option>
+                                                                        <option value="east timorese">East Timorese</option>
+                                                                        <option value="ecuadorean">Ecuadorean</option>
+                                                                        <option value="egyptian">Egyptian</option>
+                                                                        <option value="emirian">Emirian</option>
+                                                                        <option value="equatorial guinean">Equatorial Guinean</option>
+                                                                        <option value="eritrean">Eritrean</option>
+                                                                        <option value="estonian">Estonian</option>
+                                                                        <option value="ethiopian">Ethiopian</option>
+                                                                        <option value="fijian">Fijian</option>
+                                                                        <option value="filipino">Filipino</option>
+                                                                        <option value="finnish">Finnish</option>
+                                                                        <option value="french">French</option>
+                                                                        <option value="gabonese">Gabonese</option>
+                                                                        <option value="gambian">Gambian</option>
+                                                                        <option value="georgian">Georgian</option>
+                                                                        <option value="german">German</option>
+                                                                        <option value="ghanaian">Ghanaian</option>
+                                                                        <option value="greek">Greek</option>
+                                                                        <option value="grenadian">Grenadian</option>
+                                                                        <option value="guatemalan">Guatemalan</option>
+                                                                        <option value="guinea-bissauan">Guinea-Bissauan</option>
+                                                                        <option value="guinean">Guinean</option>
+                                                                        <option value="guyanese">Guyanese</option>
+                                                                        <option value="haitian">Haitian</option>
+                                                                        <option value="herzegovinian">Herzegovinian</option>
+                                                                        <option value="honduran">Honduran</option>
+                                                                        <option value="hungarian">Hungarian</option>
+                                                                        <option value="icelander">Icelander</option>
+                                                                        <option value="indian">Indian</option>
+                                                                        <option value="indonesian">Indonesian</option>
+                                                                        <option value="iranian">Iranian</option>
+                                                                        <option value="iraqi">Iraqi</option>
+                                                                        <option value="irish">Irish</option>
+                                                                        <option value="israeli">Israeli</option>
+                                                                        <option value="italian">Italian</option>
+                                                                        <option value="ivorian">Ivorian</option>
+                                                                        <option value="jamaican">Jamaican</option>
+                                                                        <option value="japanese">Japanese</option>
+                                                                        <option value="jordanian">Jordanian</option>
+                                                                        <option value="kazakhstani">Kazakhstani</option>
+                                                                        <option value="kenyan">Kenyan</option>
+                                                                        <option value="kittian and nevisian">Kittian and Nevisian</option>
+                                                                        <option value="kuwaiti">Kuwaiti</option>
+                                                                        <option value="kyrgyz">Kyrgyz</option>
+                                                                        <option value="laotian">Laotian</option>
+                                                                        <option value="latvian">Latvian</option>
+                                                                        <option value="lebanese">Lebanese</option>
+                                                                        <option value="liberian">Liberian</option>
+                                                                        <option value="libyan">Libyan</option>
+                                                                        <option value="liechtensteiner">Liechtensteiner</option>
+                                                                        <option value="lithuanian">Lithuanian</option>
+                                                                        <option value="luxembourger">Luxembourger</option>
+                                                                        <option value="macedonian">Macedonian</option>
+                                                                        <option value="malagasy">Malagasy</option>
+                                                                        <option value="malawian">Malawian</option>
+                                                                        <option value="malaysian">Malaysian</option>
+                                                                        <option value="maldivan">Maldivan</option>
+                                                                        <option value="malian">Malian</option>
+                                                                        <option value="maltese">Maltese</option>
+                                                                        <option value="marshallese">Marshallese</option>
+                                                                        <option value="mauritanian">Mauritanian</option>
+                                                                        <option value="mauritian">Mauritian</option>
+                                                                        <option value="mexican">Mexican</option>
+                                                                        <option value="micronesian">Micronesian</option>
+                                                                        <option value="moldovan">Moldovan</option>
+                                                                        <option value="monacan">Monacan</option>
+                                                                        <option value="mongolian">Mongolian</option>
+                                                                        <option value="moroccan">Moroccan</option>
+                                                                        <option value="mosotho">Mosotho</option>
+                                                                        <option value="motswana">Motswana</option>
+                                                                        <option value="mozambican">Mozambican</option>
+                                                                        <option value="namibian">Namibian</option>
+                                                                        <option value="nauruan">Nauruan</option>
+                                                                        <option value="nepalese">Nepalese</option>
+                                                                        <option value="new zealander">New Zealander</option>
+                                                                        <option value="ni-vanuatu">Ni-Vanuatu</option>
+                                                                        <option value="nicaraguan">Nicaraguan</option>
+                                                                        <option value="nigerien">Nigerien</option>
+                                                                        <option value="north korean">North Korean</option>
+                                                                        <option value="northern irish">Northern Irish</option>
+                                                                        <option value="norwegian">Norwegian</option>
+                                                                        <option value="omani">Omani</option>
+                                                                        <option value="pakistani">Pakistani</option>
+                                                                        <option value="palauan">Palauan</option>
+                                                                        <option value="panamanian">Panamanian</option>
+                                                                        <option value="papua new guinean">Papua New Guinean</option>
+                                                                        <option value="paraguayan">Paraguayan</option>
+                                                                        <option value="peruvian">Peruvian</option>
+                                                                        <option value="polish">Polish</option>
+                                                                        <option value="portuguese">Portuguese</option>
+                                                                        <option value="qatari">Qatari</option>
+                                                                        <option value="romanian">Romanian</option>
+                                                                        <option value="russian">Russian</option>
+                                                                        <option value="rwandan">Rwandan</option>
+                                                                        <option value="saint lucian">Saint Lucian</option>
+                                                                        <option value="salvadoran">Salvadoran</option>
+                                                                        <option value="samoan">Samoan</option>
+                                                                        <option value="san marinese">San Marinese</option>
+                                                                        <option value="sao tomean">Sao Tomean</option>
+                                                                        <option value="saudi">Saudi</option>
+                                                                        <option value="scottish">Scottish</option>
+                                                                        <option value="senegalese">Senegalese</option>
+                                                                        <option value="serbian">Serbian</option>
+                                                                        <option value="seychellois">Seychellois</option>
+                                                                        <option value="sierra leonean">Sierra Leonean</option>
+                                                                        <option value="singaporean">Singaporean</option>
+                                                                        <option value="slovakian">Slovakian</option>
+                                                                        <option value="slovenian">Slovenian</option>
+                                                                        <option value="solomon islander">Solomon Islander</option>
+                                                                        <option value="somali">Somali</option>
+                                                                        <option value="south african">South African</option>
+                                                                        <option value="south korean">South Korean</option>
+                                                                        <option value="spanish">Spanish</option>
+                                                                        <option value="sri lankan">Sri Lankan</option>
+                                                                        <option value="sudanese">Sudanese</option>
+                                                                        <option value="surinamer">Surinamer</option>
+                                                                        <option value="swazi">Swazi</option>
+                                                                        <option value="swedish">Swedish</option>
+                                                                        <option value="swiss">Swiss</option>
+                                                                        <option value="syrian">Syrian</option>
+                                                                        <option value="taiwanese">Taiwanese</option>
+                                                                        <option value="tajik">Tajik</option>
+                                                                        <option value="tanzanian">Tanzanian</option>
+                                                                        <option value="thai">Thai</option>
+                                                                        <option value="togolese">Togolese</option>
+                                                                        <option value="tongan">Tongan</option>
+                                                                        <option value="trinidadian or tobagonian">Trinidadian or Tobagonian</option>
+                                                                        <option value="tunisian">Tunisian</option>
+                                                                        <option value="turkish">Turkish</option>
+                                                                        <option value="tuvaluan">Tuvaluan</option>
+                                                                        <option value="ugandan">Ugandan</option>
+                                                                        <option value="ukrainian">Ukrainian</option>
+                                                                        <option value="uruguayan">Uruguayan</option>
+                                                                        <option value="uzbekistani">Uzbekistani</option>
+                                                                        <option value="venezuelan">Venezuelan</option>
+                                                                        <option value="vietnamese">Vietnamese</option>
+                                                                        <option value="welsh">Welsh</option>
+                                                                        <option value="yemenite">Yemenite</option>
+                                                                        <option value="zambian">Zambian</option>
+                                                                        <option value="zimbabwean">Zimbabwean</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </transition-group>
+                        </div>
+                        <div class="w-[29%] h-full flex items-center justify-start" v-if="checkModal('none')">
+                            <transition-group name="rightpage">
+                                <div v-if="checkPage('mychar')" class="w-[88.2%] h-full">
+                                    <div class="w-full h-full justify-between flex">
+                                        <div class="w-[92.5%] h-full flex justify-between flex-col">
+                                            <div class="w-full h-[20%] flex justify-between">
+                                                <div class="w-[22.5%] h-full flex items-center justify-center bg-zinc-300 bg-opacity-20 rounded-tl-[.4688vw] rounded-bl-[.4688vw]">
+                                                    <img class="h-[36%]" src="./templateimages/svg/phoneicon.svg" alt="" />
+                                                </div>
+                                                <div class="w-[76%] h-full flex flex-col justify-start items-end bg-zinc-300 bg-opacity-5 rounded-tr-lg rounded-br-lg hover-anim-2">
+                                                    <h2 class="text-white text-[1.3vw] mt-[1.7vh] mr-[1vw] font-['Gilroy-Black']">{{locales['PHONE_NUMBER']}}</h2>
+                                                    <h2 class="text-white text-[1vw] mr-[1vw] opacity-70 text-white font-['Gilroy-Bold'] ml-[1.15vw]" style="font-style: italic">{{myCharacter.charinfo.phone}}</h2>
+                                                </div>
+                                            </div>
+                                            <div class="w-full h-[20%] flex justify-between">
+                                                <div class="w-[22.5%] h-full flex items-center justify-center bg-zinc-300 bg-opacity-20 rounded-tl-[.4688vw] rounded-bl-[.4688vw]">
+                                                    <img class="h-[31%]" src="./templateimages/svg/cashicon.svg" alt="" />
+                                                </div>
+                                                <div class="w-[76%] h-full flex flex-col justify-start items-end bg-zinc-300 bg-opacity-5 rounded-tr-lg rounded-br-lg hover-anim-2">
+                                                    <h2 class="text-white text-[1.3vw] mt-[1.7vh] mr-[1vw] font-['Gilroy-Black']">{{locales['CASH']}}</h2>
+                                                    <h2 class="text-white text-[1vw] mr-[1vw] opacity-70 text-white font-['Gilroy-Bold'] ml-[1.15vw]" style="font-style: italic">{{moneyType}} {{myCharacter.money.cash}}</h2>
+                                                </div>
+                                            </div>
+                                            <div class="w-full h-[20%] flex justify-between">
+                                                <div class="w-[22.5%] h-full flex items-center justify-center bg-zinc-300 bg-opacity-20 rounded-tl-[.4688vw] rounded-bl-[.4688vw]">
+                                                    <img class="h-[36%]" src="./templateimages/svg/bankicon.svg" alt="" />
+                                                </div>
+                                                <div class="w-[76%] h-full flex flex-col justify-start items-end bg-zinc-300 bg-opacity-5 rounded-tr-lg rounded-br-lg hover-anim-2">
+                                                    <h2 class="text-white text-[1.3vw] mt-[1.7vh] mr-[1vw] font-['Gilroy-Black']">{{locales['BANK']}}</h2>
+                                                    <h2 class="text-white text-[1vw] mr-[1vw] opacity-70 text-white font-['Gilroy-Bold'] ml-[1.15vw]" style="font-style: italic">{{moneyType}} {{myCharacter.money.bank}}</h2>
+                                                </div>
+                                            </div>
+                                            <div class="w-full h-[20%] flex justify-between">
+                                                <div class="w-[22.5%] h-full flex items-center justify-center bg-zinc-300 bg-opacity-20 rounded-tl-[.4688vw] rounded-bl-[.4688vw]">
+                                                    <img class="h-[36%]" src="./templateimages/svg/lastlocationicon.svg" alt="" />
+                                                </div>
+                                                <div class="w-[76%] h-full flex flex-col justify-start items-end bg-zinc-300 bg-opacity-5 rounded-tr-lg rounded-br-lg hover-anim-2">
+                                                    <h2 class="text-white text-[1.3vw] mt-[1.7vh] mr-[1vw] font-['Gilroy-Black']">{{locales['LAST_LOCATION']}}</h2>
+                                                    <h2 class="text-white text-[1vw] mr-[1vw] opacity-70 text-white font-['Gilroy-Bold'] ml-[1.15vw]" style="font-style: italic">{{lastLocation}}</h2>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-[1%] h-full">
+                                            <div class="w-[50%] h-full">
+                                                <div class="w-full h-[0.5%] bg-white"></div>
+                                                <div class="flex-1 h-[99%] bg-zinc-300 bg-opacity-20"></div>
+                                                <div class="w-full h-[0.5%] bg-white"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="checkPage('createchar') && checkModal('none')" class="w-[88.2%] h-full flex items-center justify-end">
+                                    <div class="w-[79%] h-full flex justify-between">
+                                        <div class="w-[90%] h-full" style="background-image: url(./templateimages/wallet.png); background-size: 100% 100%">
+                                            <div class="w-full h-[6.5%] flex items-end justify-center">
+                                                <div class="w-[92%] h-[65%] flex justify-end">
+                                                    <div class="w-[93%] h-full flex">
+                                                        <div class="w-[50%] h-full flex items-center justify-start">
+                                                            <h2 class="font-['Gilroy-Bold'] text-white text-[0.6vw] font-['Oswald']">{{locales['SAN_ANDREAS']}}</h2>
+                                                            <h2 class="font-['Gilroy-Bold'] text-white text-[0.4vw] ml-[0.5vw] font-['Oswald']">{{locales['USA']}}</h2>
+                                                        </div>
+                                                        <div class="w-[48%] h-full flex items-center justify-end">
+                                                            <h2 class="font-['Gilroy-Bold'] text-white text-[0.6vw] font-['Oswald']">{{locales['IDENTIFICATION_CARD']}}</h2>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-full h-[11.5%] flex items-center justify-center">
+                                                <div class="w-[91.5%] h-full flex items-center justify-start">
+                                                    <div class="w-[19%] h-[100%] flex items-end justify-end">
+                                                        <div class="w-[90%] h-[90%] flex items-center justify-center">
+                                                            <img class="h-[90%]" :src="selectedGender === 'male' ? './templateimages/svg/man-wallet-icon.svg' : './templateimages/svg/woman-wallet-icon.svg'" alt="" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="w-[80%] h-full flex" v-if="characterInfo">
+                                                        <div class="w-[34%] h-[100%]">
+                                                            <div class="w-full h-[45%] flex flex-col justify-between">
+                                                                <h2 class="ml-[0.45vw] text-[.5vw] font-['Oswald'] text-rose-950">{{locales['NAME2']}}</h2>
+                                                                <h2 class="ml-[0.45vw] text-white text-[.5vw] font-['Oswald']" style="text-transform: uppercase">{{characterInfo.firstname}}</h2>
+                                                            </div>
+                                                            <div class="w-full h-[45%] mt-[0.6vh] flex flex-col justify-between">
+                                                                <h2 class="ml-[0.45vw] text-[.5vw] font-['Oswald'] text-rose-950">{{locales['SURNAME2']}}</h2>
+                                                                <h2 class="ml-[0.45vw] text-white text-[.5vw] font-['Oswald']" style="text-transform: uppercase">{{characterInfo.lastname}}</h2>
+                                                            </div>
+                                                        </div>
+                                                        <div class="w-[34%] h-[100%]">
+                                                            <div class="w-full h-[45%] flex flex-col justify-between">
+                                                                <h2 class="text-[.5vw] font-['Oswald'] text-rose-950">{{locales['BIRTHDATE2']}}</h2>
+                                                                <h2 class="text-white text-[.5vw] font-['Oswald']" style="text-transform: uppercase">{{characterInfo.birthdate == false ? '' : characterInfo.birthdate}}</h2>
+                                                            </div>
+                                                            <div class="w-full h-[45%] mt-[0.6vh] flex flex-col justify-between">
+                                                                <h2 class="text-[.5vw] font-['Oswald'] text-rose-950">{{locales['SEX']}}</h2>
+                                                                <h2 class="text-white text-[.5vw] font-['Oswald']" style="text-transform: uppercase">{{selectedGender == 'male' ? 'MALE' : 'FEMALE'}}</h2>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-full h-[10%] flex items-end justify-center">
+                                                <div class="w-[90%] h-[55%] flex justify-end">
+                                                    <div class="w-[90%] h-full flex justify-between items-center">
+                                                        <h2 class="text-white font-['Oswald'] text-[0.6vw]">{{locales['LS_INTERNATIONAL_AIRPORT']}}</h2>
+                                                        <h2 class="text-white font-['Oswald'] text-[0.6vw] mr-[0.3vw]">{{locales['BOARDING_PASS']}}</h2>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="w-full h-[70%] flex items-end justify-center">
+                                                <div class="w-[94%] h-[56%] flex items-center justify-center">
+                                                    <div class="w-[60%] h-[35%] flex items-center justify-center relative" style="background-image: url(./templateimages/logo.png); background-size: 100% 100%">
+                                                        <div class="w-[30%] h-[70%] mt-[.4vw]">
+                                                            <img :src="serverlogo" alt="" />
+                                                        </div>
+                                                        <div class="w-[70%] h-[70%]">
+                                                            <div class="w-[75%] h-full flex items-center justify-start">
+                                                                <h2 :class="currentThema+'text'" style="letter-spacing: 0.1vw" class="text-[1vw] mb-[0.4vw] font-normal font-['Gilroy-Black']">{{locales['ROLEPLAY']}}</h2>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="w-[1%] h-full">
+                                            <div class="w-[50%] h-full">
+                                                <div class="w-full h-[0.5%] bg-white"></div>
+                                                <div class="flex-1 h-[99%] bg-zinc-300 bg-opacity-20"></div>
+                                                <div class="w-full h-[0.5%] bg-white"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </transition-group>
+                        </div>
+                    </div>
+
+                    <div class="w-full h-[13.7%] flex items-end">
+                        <div v-if="checkPage('mychar') && checkModal('none')" class="w-full h-[43%] flex justify-between">
+                            <div class="w-[26.1%] h-full flex justify-end">
+                                <div :class="currentThema+'playtime'" class="w-[60%] h-full flex items-center justify-center">
+                                    <h2 class="text-[1.1vw] font-normal font-['Gilroy-Heavy']" v-if="selectedCharacter">{{selectedCharacter.playtime}}</h2>
+                                </div>
+                            </div>
+                            <div class="w-[26.1%] h-full flex justify-start">
+                                <div v-if="deleteCharacterButton" @click="clickModal('openDelete')" class="hover-anim w-[60%] h-full bg-[#FE002E] rounded-lg shadow-inner-2 flex items-center justify-center cursor-pointer">
+                                    <h2 class="text-black text-[1.1vw] font-normal font-['Gilroy-Heavy']">{{locales['DELETE_CHARACTER']}}</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-if="buyCharacter" class="w-full h-full flex items-center justify-center text-center">
+                            <h2 class="w-[30%] text-[#FFF] text-[.7292vw] font-['Gilroy-Black']" style="font-style: italic; letter-spacing: 0.0521vw">{{locales['SLOTFULLTEXT']}}</h2>
+                        </div>
+                    </div>
+                    <div v-if="checkPage('mychar') && checkModal('none')" class="w-full h-[9%] flex items-center">
+                        <div class="w-[33%] h-full flex justify-end">
+                            <div class="w-[89.5%] h-full flex items-center">
+                                <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                                <div class="flex-1 h-[0.5%] bg-zinc-300 bg-opacity-20"></div>
+                                <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                            </div>
+                        </div>
+                        <div v-if="characterData[characterIndex]" class="hover-anim w-[34%] h-full flex items-center justify-center relative cursor-pointer" @click="continuePlayer">
+                            <div class="w-[54%] h-[80%] flex items-center justify-center relative">
+                                <h2 class="text-[#999] text-[3.3333vw] font-['Gilroy-Black'] absolute ml-[.3vw]" style="letter-spacing: 0.1333vw; font-style: italic; text-shadow: 0vw 0vw 3.5417vw rgba(255, 255, 255, 0.25)">{{locales['CONTINUE']}}</h2>
+                                <h2 class="text-[#FFFFFF] text-[3.3333vw] font-['Gilroy-Black'] absolute" style="letter-spacing: 0.1333vw; font-style: italic; text-shadow: 0vw 0vw 3.5417vw rgba(255, 255, 255, 0.25)">{{locales['CONTINUE']}}</h2>
+                            </div>
+                        </div>
+                        <div class="w-[29.5%] h-full flex items-center">
+                            <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                            <div class="flex-1 h-[0.5%] bg-zinc-300 bg-opacity-20"></div>
+                            <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                        </div>
+                    </div>
+                    <div v-if="checkPage('createchar') && checkModal('none')" class="w-full h-[9%] flex items-center">
+                        <div class="w-[33%] h-full flex justify-end">
+                            <div class="w-[89.5%] h-full flex items-center">
+                                <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                                <div class="flex-1 h-[0.5%] bg-zinc-300 bg-opacity-20"></div>
+                                <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                            </div>
+                        </div>
+                        <div v-if="buyCharacter" class="hover-anim w-[34%] h-full flex items-center justify-center relative cursor-pointer" @click="openCreateModal">
+                            <div class="w-[54%] h-[80%] flex items-center justify-center relative">
+                                <h2 class="text-[#FFF388] text-[3.3333vw] font-['Gilroy-Black']" style="letter-spacing: 0.1333vw; font-style: italic; text-shadow: 0vw 0vw 3.5417vw rgba(255, 243, 136, 0.25)">{{locales['BUY_SLOT']}}</h2>
+                            </div>
+                        </div>
+                        <div v-else class="hover-anim w-[34%] h-full flex items-center justify-center relative cursor-pointer" @click="CreateCharacter">
+                            <div class="w-[54%] h-[80%] flex items-center justify-center relative">
+                                <h2 class="text-[#999] text-[3.3333vw] font-['Gilroy-Black'] absolute ml-[.3vw]" style="letter-spacing: 0.1333vw; font-style: italic; text-shadow: 0vw 0vw 3.5417vw rgba(255, 255, 255, 0.25)">{{locales['CREATE']}}</h2>
+                                <h2 class="text-[#FFFFFF] text-[3.3333vw] font-['Gilroy-Black'] absolute" style="letter-spacing: 0.1333vw; font-style: italic; text-shadow: 0vw 0vw 3.5417vw rgba(255, 255, 255, 0.25)">{{locales['CREATE']}}</h2>
+                            </div>
+                        </div>
+
+                        <div class="w-[29.5%] h-full flex items-center">
+                            <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                            <div class="flex-1 h-[0.5%] bg-zinc-300 bg-opacity-20"></div>
+                            <div class="w-[0.2vw] h-[0.5%] bg-white"></div>
+                        </div>
+                    </div>
+                    <div v-if="checkModal('tebex')" class="w-full h-[15%] flex items-center justify-center relative">
+                        <div class="w-[4%] h-[80%] bottom-0 absolute" style="z-index: 0; background: rgb(254, 0, 46); filter: blur(5vw)"></div>
+                        <div class="w-[8%] h-[25%] top-0 mb-[1vw] flex items-center justify-center absolute text-center">
+                            <h2 class="text-white text-[.625vw] font-['Gilroy-SemiBold'] text-center" style="letter-spacing: 0.0521vw; text-shadow: 0vw 0vw 1.8229vw rgba(255, 146, 67, 0.45)">{{locales['EXITFROMBUYING']}}</h2>
+                        </div>
+                        <div class="w-[3%] h-[25%] bg-[#FE002E] rounded-[0.3vw] flex items-center justify-center absolute">
+                            <h2 class="font-normal font-['Gilroy-Heavy'] text-[0.8vw]">{{locales['ESC']}}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.1/howler.min.js" type="text/javascript"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
+        <script src="./js/air-datepicker.js"></script>
+        <script src="./js/app.js" type="module"></script>
+    </body>
+</html>

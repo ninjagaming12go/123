@@ -1,0 +1,213 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    display: none;
+}
+
+#root-menu {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.45);
+    display: none;
+}
+
+#root-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    transform: translate(-50%, -50%);
+    background: rgba(20,20,20,0.95);
+    border-radius: 10px;
+    padding: 25px;
+    color: white;
+    text-align: center;
+}
+
+#root-title {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.root-btn {
+    background: rgba(255,255,255,0.1);
+    padding: 12px;
+    margin-top: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.15s;
+    font-size: 20px;
+}
+
+.root-btn:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+#contract-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.45);
+    display: none;
+}
+
+#contract-panel {
+    width: 40%;
+    margin: 5% auto;
+    background: rgba(20,20,20,0.95);
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+}
+
+.contract-entry {
+    background: rgba(255,255,255,0.1);
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.contract-entry:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.contract-btn {
+    margin-top: 20px;
+    padding: 10px;
+    background: rgba(255,255,255,0.15);
+    text-align: center;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+-- Dealer
+
+#dealer-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background: rgba(0,0,0,0.7);
+}
+
+#dealer-panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 500px;
+    transform: translate(-50%, -50%);
+    background: rgba(20,20,20,0.95);
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    animation: fadeIn 0.2s ease-out;
+}
+
+#dealer-title {
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.dealer-entry {
+    background: rgba(255,255,255,0.05);
+    padding: 12px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.15s;
+}
+
+.dealer-entry.locked {
+    opacity: 0.4;
+}
+
+.dealer-entry:hover {
+    background: rgba(255,255,255,0.18);
+}
+
+.dealer-btn {
+    background: rgba(255,255,255,0.1);
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+}
+#dealer-preview {
+    width: 100%;
+    height: 200px;
+    background: rgba(0,0,0,0.4);
+    border-radius: 6px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#dealer-preview-img {
+    max-width: 100%;
+    max-height: 100%;
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+}
+
+.dealer-entry.locked {
+    opacity: 0.35;
+    position: relative;
+}
+
+.dealer-entry.locked::after {
+    content: attr(data-req);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,0,0,0.25);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fadeIn {
+    animation: fadeInAnim 0.25s ease-out;
+}
+
+@keyframes fadeInAnim {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.dealer-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.dealer-btn-small {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    padding: 8px;
+    border-radius: 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.15s;
+    font-size: 15px;
+}
+
+.dealer-btn-small:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+.dealer-btn-small.disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+}

@@ -1,0 +1,28 @@
+body {
+    background: rgba(0,0,0,0.6);
+    font-family: Arial;
+    display: none;
+}
+
+#bank {
+    width: 400px;
+    margin: 100px auto;
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 6px;
+    color: white;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #2ecc71;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+}

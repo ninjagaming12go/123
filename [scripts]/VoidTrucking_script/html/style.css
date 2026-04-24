@@ -1,0 +1,310 @@
+.hidden {
+    display: none !important;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: transparent;
+}
+
+/* PANEL */
+
+.panel {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 900px;
+    height: 520px;
+    transform: translate(-50%, -50%);
+    background: rgba(5,5,5,0.92);
+    border: 2px solid rgba(255,255,255,0.12);
+    box-shadow: 0 0 40px rgba(0,0,0,0.9);
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-title {
+    height: 60px;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    color: #fff;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    letter-spacing: 2px;
+}
+
+.panel-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* BUTTONS */
+
+.btn {
+    background: #c62828;
+    color: #fff;
+    padding: 12px;
+    text-align: center;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.btn:hover {
+    background: #e53935;
+    transform: translateY(-1px);
+}
+
+.btn.cancel {
+    background: #444;
+}
+
+.btn.cancel:hover {
+    background: #555;
+}
+
+.btn.disabled {
+    background: #333 !important;
+    color: #777 !important;
+    pointer-events: none;
+}
+
+/* TABS */
+
+#tabs {
+    display: flex;
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+.tab {
+    flex: 1;
+    padding: 14px;
+    text-align: center;
+    color: #ccc;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.15s ease;
+}
+
+.tab:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.tab.active {
+    background: rgba(255,0,0,0.45);
+    color: #fff;
+}
+
+/* DEALERSHIP */
+
+#dealer-body {
+    flex: 1;
+    display: flex;
+    background: rgba(0,0,0,0.35);
+}
+
+#dealer-list {
+    width: 32%;
+    border-right: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    overflow-y: auto;
+}
+
+.dealer-item {
+    padding: 14px 20px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.15s ease;
+}
+
+.dealer-item:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.dealer-item.active {
+    background: rgba(255,0,0,0.45);
+}
+
+.dealer-lock {
+    color: #ff4444;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.dealer-owned {
+    color: #55ff55;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+#dealer-detail {
+    width: 68%;
+    padding: 20px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#dealer-image {
+    flex: 1;
+    background: #0a0a0a;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 6px;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+}
+
+#dealer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#dealer-name {
+    font-size: 24px;
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+#dealer-level,
+#dealer-price,
+#dealer-rent {
+    font-size: 16px;
+    color: #ddd;
+}
+
+#dealer-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+/* XP BAR */
+#xp-wrapper {
+    position: absolute;
+    top: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 1.2vh;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.xp-circle {
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    background: radial-gradient(circle, #4aa3ff 0%, #1e6bd6 70%, #0f3a7a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.2vh;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+}
+
+#xp-bar {
+    width: 40vh;
+    height: 1.4vh;
+    background: rgba(255,255,255,0.15);
+    border-radius: 1vh;
+    overflow: hidden;
+}
+
+#xp-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #4aa3ff, #1e6bd6);
+    transition: width 1.2s cubic-bezier(.25,.46,.45,.94);
+}
+
+#xp-text {
+    position: absolute;
+    top: 6vh;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.6vh;
+    color: white;
+    font-weight: 600;
+    text-shadow: 0 0 6px rgba(0,0,0,0.8);
+}
+
+#xp-shockwave {
+    position: absolute;
+    top: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50%;
+    border: 0.4vh solid #4aa3ff;
+    opacity: 0;
+}
+
+#xp-burst {
+    position: absolute;
+    top: 4vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0.5vh;
+    height: 0.5vh;
+    background: #4aa3ff;
+    border-radius: 50%;
+    opacity: 0;
+}
+/* TRAILER DAMAGE */
+#merged-health-container {
+    position: absolute;
+    bottom: 8%;
+    left: 28%;
+    transform: translateX(-50%);
+    width: 300px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+#merged-health-title {
+    font-size: 14px;
+    color: white;
+    margin-bottom: 4px;
+    text-shadow: 0 0 4px black;
+}
+
+#merged-health-bar-bg {
+    width: 100%;
+    height: 16px;
+    background: rgba(0,0,0,0.55);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#merged-health-bar {
+    height: 100%;
+    width: 100%;
+    background: green;
+    transition: width 0.2s linear, background 0.2s linear;
+}
+
+#merged-health-percent {
+    margin-top: 4px;
+    font-size: 13px;
+    color: white;
+    text-shadow: 0 0 4px black;
+}

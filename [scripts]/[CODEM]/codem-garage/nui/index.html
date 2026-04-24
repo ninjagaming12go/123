@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magni#0247</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="./vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+    <div id="app" v-show="show">
+        <div class="main-wrapper">
+            <div class="main-wrapper-top">
+                  <div class="playerimageandname">
+                     <div class="playerimage">
+                        <img :src="avatar" alt="" id="avatar">
+                        <div class="playername">
+                           <h2>Hello</h2>
+                           <h3 id="name">{{name}}</h3>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div class="garage-top-logo">
+                     <img src="./images/logo/logo.png" alt="" id="headlogo">
+                     <h2>GARAGE</h2>
+                  </div>
+    
+                  <div class="garage-top-close-button">
+                     <div class="exit-from">
+                        <h2>EXIT FROM</h2>
+                        <h3>GARAGE MENU</h3>
+                     </div>
+                     <img src="./images/close.png" @click="close()" alt="">
+                  </div>
+            </div>
+
+            <section class="car-category">
+               <div class="category-image" v-show="garagetypes != 'jobgarage'" @click="showfavorites()" v-bind:style=" showfavorite ? {'color': 'yellow'} : {'transition':'1s all'}">
+                  <i class="fas fa-star"></i>
+               </div>
+               <div class="car-categorywrapper">
+                  <div class="car-categoryline" v-show="garagetypes != 'jobgarage'"></div>
+                  <div class="cars" v-show="garagetypes == 'normal' || garagetypes == 'jobgarage' || garagetypes == 'impound' " @click="showcars()" v-bind:style=" showcar ? {'color': 'white'} : {'transition':'1s all'}">CARS</div>
+                  <div class="motor" v-show="garagetypes == 'normal' || garagetypes == 'jobgarage' || garagetypes == 'impound'" @click="showmotorcycle()" v-bind:style=" showmotor ? {'color': 'white'} : {'transition':'1s all'}">MOTORCYCLES</div>
+                  <div class="bikes" v-show="garagetypes == 'normal' || garagetypes == 'jobgarage' || garagetypes == 'impound'" @click="showbikes()" v-bind:style=" showbike ? {'color': 'white'} : {'transition':'1s all'}">BIKES</div>
+                  <div class="boat" v-show="garagetypes == 'boat' || garagetypes == 'impoundboat' || garagetypes == 'jobgarage'" @click="showboat()" v-bind:style=" showboats ? {'color': 'white'} : {'transition':'1s all'}">BOAT</div>
+                  <div class="aircraft" v-show="garagetypes == 'aircraft' || garagetypes == 'jobgarage' || garagetypes == 'impoundplane'" @click="showair()" v-bind:style=" showairs ? {'color': 'white'} : {'transition':'1s all'}">AIR CRAFT</div>
+               </div>
+            </section>
+
+            <div class="mouse-move"></div>
+
+            <!-- normal -->
+
+            <div class="car-wrapper" v-show="garagetypes == 'normal'">
+               
+               <div class="car-wrapper-car"  v-for="(data,index) in vehicles"  v-show="checkVehicleClass(data.class) && showcar && data.favorite == 0 && !showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound )) " @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}" >
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-motor" v-for="(data,index)  in vehicles" v-show="data.class == 8 && showmotor && data.favorite == 0 && !showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound )) " @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-bikes" v-for="(data,index)  in vehicles" v-show="data.class == 13 && showbike && data.favorite == 0 && !showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound )) " @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <!-- Favorite -->
+
+               <div class="car-wrapper-car" v-for="(data,index)  in vehicles" v-show="checkVehicleClass(data.class) && showcar && data.favorite == 1 && showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound ))" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2" >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-motor" v-for="(data,index)  in vehicles" v-show="data.class == 8 && showmotor && data.favorite == 1 && showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound ))" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2" >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-bikes" v-for="(data,index)  in vehicles" v-show="data.class == 13 && showbike && data.favorite == 1 && showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound ))" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2" >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+            </div>
+
+            
+            <div class="car-wrapper5" v-show="garagetypes == 'impound'">
+               
+               <div class="car-wrapper-car"  v-for="(data,index) in vehicles"  v-show="checkVehicleClass(data.class) && showcar && data.favorite == 0 && !showfavorite && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}" >
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-motor" v-for="(data,index)  in vehicles" v-show="data.class == 8 && showmotor && data.favorite == 0 && !showfavorite  && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-bikes" v-for="(data,index)  in vehicles" v-show="data.class == 13 && showbike && data.favorite == 0 && !showfavorite  && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <!-- Favorite -->
+
+               <div class="car-wrapper-car" v-for="(data,index)  in vehicles" v-show="checkVehicleClass(data.class) && showcar && data.favorite == 1 && showfavorite  && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2" >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-motor" v-for="(data,index)  in vehicles" v-show="data.class == 8 && showmotor && data.favorite == 1 && showfavorite  && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2" >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-bikes" v-for="(data,index)  in vehicles" v-show="data.class == 13 && showbike && data.favorite == 1 && showfavorite  && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2" >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+            </div>
+
+            <!-- boat -->
+
+            <div class="car-wrapper2" v-show="garagetypes == 'boat'">
+               <div class="car-wrapper-boat" v-for="(data,index)  in vehicles" v-show="data.class == 14 && data.favorite == 0 && !showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound ))" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <!-- Favorite -->
+
+               <div class="car-wrapper-boat" v-for="(data,index)  in vehicles" v-show="data.class == 14 && data.favorite == 1 && showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound ))" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2"  >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+            </div>
+
+            <!-- air -->
+
+            <div class="car-wrapper3" v-show="garagetypes == 'aircraft'">
+               <div class="car-wrapper-air" v-for="(data,index)  in vehicles" v-show="checkAirClass(data.class) && data.favorite == 0 && !showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound ))" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <!-- Favorite -->
+
+               <div class="car-wrapper-air" v-for="(data,index)  in vehicles" v-show="checkAirClass(data.class) && data.favorite == 1 && showfavorite && ((!data.stored == 0 && impound && !vale) || (vale && !impound ))" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2"  >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+            </div>
+
+                        <!-- impoundboat -->
+
+            <div class="car-wrapper2" v-show="garagetypes == 'impoundboat'">
+               <div class="car-wrapper-boat" v-for="(data,index)  in vehicles" v-show="data.class == 14 && data.favorite == 0 && !showfavorite && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <!-- Favorite -->
+
+               <div class="car-wrapper-boat" v-for="(data,index)  in vehicles" v-show="data.class == 14 && data.favorite == 1 && showfavorite && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2"  >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+            </div>
+
+            <!-- air -->
+
+            <div class="car-wrapper3" v-show="garagetypes == 'impoundplane'">
+               <div class="car-wrapper-air" v-for="(data,index)  in vehicles" v-show="checkAirClass(data.class) && data.favorite == 0 && !showfavorite && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <!-- Favorite -->
+
+               <div class="car-wrapper-air" v-for="(data,index)  in vehicles" v-show="checkAirClass(data.class) && data.favorite == 1 && showfavorite && data.stored == 0" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite2"  >Remove to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],0)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+            </div>
+
+            <!-- jobgarage -->
+
+            <div class="car-wrapper4" v-show="garagetypes == 'jobgarage'">
+               <div class="car-wrapper-car" v-for="(data,index)  in vehicles" v-show="checkVehicleClass(data.class) && showcar && data.class != 15 && data.class !=16" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-motor" v-for="(data,index)  in vehicles" v-show="data.class == 8 && showmotor" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-bikes" v-for="(data,index)  in vehicles" v-show="data.class == 13 && showbike" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-boat" v-for="(data,index)  in vehicles" v-show="data.class == 14 && showboats" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <div id="Favorite"  >Add to favorites <i class="far fa-star" id="star" @click="favorite(data.vehicle['plate'],1)"></i></div>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+
+               <div class="car-wrapper-air" v-for="(data,index)  in vehicles" v-show="checkAirClass(data.class) && showairs" @click="spawnlocalvehicle(data.vehicle,data.pgarage,data.stored,data.carname,data.class,data.carlogo,data.speed,data.caracce,data.price,index)" v-bind:style=" border[index] ? {'border': '1px solid white'} : {'transition':'none'}">
+                  <p class="carnameee">{{data.carname.toUpperCase()}}</p>
+                  <img v-if="'./images/cars/'+data.carname+'.png'" :src="'./images/cars/'+data.carimage+'.png'">
+                  <img v-else src="./images/cars/car.png">
+               </div>
+            </div>
+
+            <section class="car-box-details">
+
+               <div class="carbox-car-logo-container">
+                  <div class="carbox-car-logo" v-show="carmark">
+                     <img :src="'./images/logo/'+carmark+'.png'">
+                  </div>
+                  <h2 id="model" v-show="carname">{{carname}}</h2>
+                  <div class="car-box-text">
+                     <p id="text3" v-show="cartext">{{cartext}} </p>
+                  </div>
+               </div>
+
+               <div class="car-box-details2">
+
+                  <div class="car-box-details-buttons" v-show="speed">
+                     <h2 id="specs" @click="specs()"  v-bind:style=" showspecs ? {'color': 'white'} : {'transition':'1s all'}">SPECS</h2>
+                     <h2 id="transfer" v-show="transfer && garagetypes != 'jobgarage'" @click="transfershow()" v-bind:style=" transfershows ? {'color': 'white'} : {'transition':'1s all'}">TRANSFER</h2>
+                     <h2 id="sell" v-show="sell && garagetypes != 'jobgarage'" @click="sellshow()" v-bind:style=" showsell ? {'color': 'white'} : {'transition':'1s all'}">SELL</h2>
+                     <h2 id="compenents" v-show="garagetypes == 'jobgarage'" @click="showcomp()" v-bind:style=" comp ? {'color': 'white'} : {'transition':'1s all'}">COMPENENTS</h2>
+                  </div>
+
+                  <div class="carbox-details-wrapper-text" v-show="speed">
+                     <div class="carbox-maxdetails" v-show="showspecs">
+                       <h2>Max Speed</h2>
+                        <h3 id="max">{{speed}}</h3> 
+                     </div>
+
+                     <div class="carbox-maxdetails" v-show="showspecs">
+                        <h2>Acceleration 0-100</h2>
+                        <h3 id="acce">{{caracce}}</h3>
+                     </div>
+
+                     <div class="carbox-maxdetails" v-show="showspecs">
+                        <h2>Weight</h2>
+                        <h3 id="weight">{{carweight}}</h3>
+                     </div>
+
+                     <div class="carbox-maxdetails" v-show="showspecs">
+                        <h2>Plate Number</h2>
+                        <h3 id="plate">{{plate}}</h3>
+                     </div>
+
+                     <div class="carbox-transfer" v-show="transfershows">
+                        <h2>ID</h2>
+                        <input type="text" name="" id="identifier" placeholder="ID">
+                     </div>
+                      
+                     <div class="carbox-transfer" v-show="transfershows">
+                        <h2>Transfer Vehicle</h2>
+                        <h3 id="tvehicle">{{carname}}</h3>
+                     </div>
+
+                     <div class="carbox-transfer" v-show="transfershows">
+                        <h2>Plate Number</h2>
+                        <h3 id="tplate">{{plate}}</h3>
+                     </div>
+  
+                     <div class="carbox-sell" v-show="showsell">
+                        <h2>Valute of car</h2>
+                        <h3 id="prices">{{price}}</h3>
+                     </div>
+                     
+                     <div class="carbox-sell" v-show="showsell">
+                        <h2>Selling vehicle</h2>
+                        <h3 id="svehicle">{{carname}}</h3>
+                      </div>
+
+                     <div class="carbox-sell" v-show="showsell">
+                        <h2>Plate Number</h2>
+                        <h3 id="splate">{{plate}}</h3>
+                     </div>
+
+                     <div class="carbox-sell" v-show="comp">
+                        <h2>Livery</h2>
+                        <button id="geri" @click="backlivery()"><  </button>
+                        <p id="livnumber"> {{liverycount}} </p>
+                        <button id="ileri" @click=" nextlivery()">  ></button>
+                     </div>
+
+                     <div class="carbox-sell" v-show="comp">
+                        <h2>Extras</h2>
+                        <button id="geri" @click="backextra()"><  </button>
+                        <p id="livnumber"> {{extracount}} </p>
+                        <button id="ileri" @click="nextextra()">  ></button>
+                        <div class="aply" @click="apply()">Apply</div>
+                     </div>
+                  </div>
+
+                  <div class="carbox-spawnbutton">
+                     <div class="spawnbutton" v-show="stored == 1 && showspecs" @click="spawnvehicle('normal')">Spawn</div>
+                     <div class="vale" @click="spawnvehicle('vale')" v-show="stored == 0 && showspecs && vale && (garagetypes != 'impound' || garagetypes != 'impoundplane' || garagetypes != 'impoundboat')" >Vale</div>
+                     <div class="vale" @click="spawnvehicle('impound')" v-show="stored == 0 && showspecs && impound && (garagetypes == 'impound' || garagetypes == 'impoundplane' || garagetypes == 'impoundboat')">Get vehicle from impound {{impoundprice}}</div>
+                     <div class="out" v-show="stored == 2 && showspecs">Car is outside</div>
+                     <div class="transferbutton" id="transferbut" v-show="transfershows && garagetypes != 'jobgarage'" @click="transfervehicle()">Transfer</div>
+                     <div class="sellbutton" id="sellbut" v-show="showsell && garagetypes != 'jobgarage'"  @click="sellVehicle()">Sell</div>
+                     <div class="repairbutton" v-show="plate && showspecs && repair && garagetypes != 'jobgarage'" @click="repairvehicle()">Repair</div>
+                  </div>
+
+               </div>
+               
+            </div>
+        </div>
+    </div>
+</body>
+    <script src="nui://game/ui/jquery.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="script.js"></script>
+</html>

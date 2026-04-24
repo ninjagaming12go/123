@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pilot Job UI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body style="display:none;">
+
+    <!-- ROOT MENU -->
+    <<div id="root-menu" style="display:none;">
+    <div id="root-panel">
+        <div id="root-title">Pilot Job</div>
+
+        <div id="root-legal" class="root-btn">Legal Flights</div>
+        <div id="root-illegal" class="root-btn">Illegal Flights</div>
+
+        <div id="root-close" class="root-btn root-close">Close</div>
+    </div>
+</div>
+
+    <!-- CONTRACT MENU -->
+    <div id="contract-bg" style="display:none;">
+        <div id="contract-panel">
+            <div id="contract-title">Available Contracts</div>
+
+            <div id="contract-list"></div>
+
+            <div id="closeContract" class="contract-btn">Close</div>
+        </div>
+    </div>
+
+
+    <!-- DEALERSHIP UI -->
+    <div id="dealer-bg" style="display:none;">
+        <div id="dealer-panel">
+
+            <div id="dealer-title">Plane Dealership</div>
+
+            <!-- Preview Image -->
+            <div id="dealer-preview">
+                <img id="dealer-preview-img" src="" />
+            </div>
+
+            <!-- Plane List -->
+            <div id="dealer-list"></div>
+
+            <!-- Close Button -->
+            <div id="dealerClose" class="dealer-btn">Close</div>
+
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
