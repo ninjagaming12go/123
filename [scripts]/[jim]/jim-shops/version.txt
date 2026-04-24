@@ -1,0 +1,9 @@
+3.1.0
+
+- Add New "Basket System"
+- Adds option to change all stores to use a checkout basket instead of per item purchase
+- Add Currency symbol override to Config.lua
+- Add locale system
+- Fix having exact cash claiming "not enough money"
+
+https://github.com/jimathy/jim-shops/releases/latest
