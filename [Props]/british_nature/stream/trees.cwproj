@@ -1,0 +1,23 @@
+<CodeWalkerProject>
+  <Name>New CodeWalker Project</Name>
+  <Version value="1" />
+  <YmapFilenames>
+    <Item>trees.ymap</Item>
+    <Item>map edits\lr_sc1_rd_critical_0.ymap</Item>
+    <Item>map edits\lr_sc1_rd_long_1.ymap</Item>
+    <Item>map edits\lr_sc1_rd.ymap</Item>
+    <Item>map edits\lr_sc1_rd_strm_0.ymap</Item>
+    <Item>map edits\lr_sc1_10_strm_2.ymap</Item>
+  </YmapFilenames>
+  <YtypFilenames />
+  <YbnFilenames />
+  <YndFilenames />
+  <YnvFilenames />
+  <TrainsFilenames />
+  <ScenarioFilenames />
+  <AudioRelFilenames />
+  <YdrFilenames />
+  <YddFilenames />
+  <YftFilenames />
+  <YtdFilenames />
+</CodeWalkerProject>

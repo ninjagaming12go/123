@@ -1,0 +1,5 @@
+please be aware that the location of this MLO was formely known as a ron fuel station therefore NV users will experience some random light enhancments withing the nhs ambualnce grounds.
+
+this isnt an error with the interior instead this is conflicting with NV on your side.
+
+there is a simple fix for this which is to go into the NV mods folder and search for the file called (o_NVE_Animated_Lights.rpf) and just remove it. altho bear in mind it will remove this enhancment from every where it was initally put.
